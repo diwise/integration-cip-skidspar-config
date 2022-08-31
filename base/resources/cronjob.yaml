@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: integration-cip-skidspar
+spec:
+  schedule: "*/5 * * * *" # run every five minutes by default
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+        spec:
+          containers:
+          - env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            name: integration-cip-skidspar
+            image: ghcr.io/diwise/integration-cip-skidspar:changeme
+            imagePullPolicy: IfNotPresent
+            resources:
+              limits:
+                cpu: 100m
+                memory: 250Mi
+              requests:
+                cpu: 50m
+                memory: 100Mi
+          restartPolicy: Never
+          serviceAccountName: integration-cip-skidspar
