@@ -1,3 +1,3 @@
 - op: replace
-  path: "/spec/template/spec/containers/0/image"
+  path: "/spec/jobTemplate/spec/containers/0/image"
   value: ghcr.io/diwise/integration-cip-skidspar@sha256:3c4699ab5d07a0a506c9546dc4e6ecf209912a4094302fdb697ec1b38265dc82
